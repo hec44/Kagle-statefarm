@@ -1,13 +1,4 @@
 
-    print('Not using data augmentation.')
-    model.fit(X_train, Y_train,
-              batch_size=batch_size,
-              nb_epoch=nb_epoch,
-              validation_data=(X_test, Y_test),
-              shuffle=True)
-
-    print('Using real-time data augmentation.')
-
     # this will do preprocessing and realtime data augmentation
     datagen = ImageDataGenerator(
         featurewise_center=False,  # set input mean to 0 over the dataset
