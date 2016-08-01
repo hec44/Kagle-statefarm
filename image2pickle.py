@@ -10,7 +10,7 @@ def get_train_data(path,img_cols,img_rows,num_imgs=-1):
 	i=1
 	x_img=[]
 	y_labels=[]
-	if num_imgs!=-1:
+	if num_imgs!="-1":
 		for imagePath in paths.list_images(path):
 			i+=1
 			print(imagePath,str(i))
@@ -29,7 +29,20 @@ def get_train_data(path,img_cols,img_rows,num_imgs=-1):
 
 
 	else:
-		#TODO
+		print("HOLAAA")
+		for imagePath in paths.list_images(path):
+			i+=1
+			print(imagePath,str(i))
+			img=cv2.imread(imagePath)
+
+			imagePath=imagePath.split("/")
+			y_labels.append(int(imagePath[1].replace("c","")))#once we split, lists are like this
+										#[train,c0,img3012341.jpg]
+										#we want only integers for CNN model
+			res = cv2.resize(img, (img_cols, img_rows))
+			res=res.transpose(2,0,1)#Size is now 3x32x32
+			x_img.append(res)
+
 		return x_img,y_labels
 def get_train_folders(root_path,img_cols,img_rows,num_imgs=-1):
 	data_x=[]
